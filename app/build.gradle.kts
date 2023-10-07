@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt") // Apply the Kotlin Kapt plugin
 }
 
 android {
@@ -52,8 +53,9 @@ android {
 
 dependencies {
     // Room Database
-    implementation ("androidx.room:room-runtime:2.5.2")
-    annotationProcessor ("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-runtime:2.5.2")
+    //KSP did not work
+    kapt("androidx.room:room-compiler:2.5.2")
 
     // Firebase Authentication
     implementation ("com.google.firebase:firebase-auth:23.0.0")

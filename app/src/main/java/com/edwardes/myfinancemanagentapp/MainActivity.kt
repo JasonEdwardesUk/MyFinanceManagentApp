@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.edwardes.myfinancemanagentapp.ui.theme.MyFinanceManagentAppTheme
 
+// AppDatabase, Expense and ExpenseDao are the 3 basic classes for the room database
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
