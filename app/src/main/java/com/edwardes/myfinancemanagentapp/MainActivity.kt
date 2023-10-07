@@ -2,46 +2,35 @@ package com.edwardes.myfinancemanagentapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.edwardes.myfinancemanagentapp.ui.theme.MyFinanceManagentAppTheme
+import androidx.lifecycle.ViewModelProvider
+import com.edwardes.myfinancemanagentapp.database.AppDatabase
+import com.edwardes.myfinancemanagentapp.database.Expense
+import com.edwardes.myfinancemanagentapp.repository.ExpenseRepository
+import com.edwardes.myfinancemanagentapp.repository.ExpenseViewModel
+import com.edwardes.myfinancemanagentapp.repository.ExpenseViewModelFactory
 
 // AppDatabase, Expense and ExpenseDao are the 3 basic classes for the room database
 class MainActivity : ComponentActivity() {
+
+    private lateinit var viewModel: ExpenseViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MyFinanceManagentAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
-        }
-    }
-}
+        setContentView(R.layout.activity_main)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        val database = AppDatabase.getInstance(this)
+        val repository = ExpenseRepository(database.expenseDao())
+        val factory = ExpenseViewModelFactory(repository)
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyFinanceManagentAppTheme {
-        Greeting("Android")
+        viewModel = ViewModelProvider(this, factory).get(ExpenseViewModel::class.java)
+
+        // Observe changes in the expenses data
+        viewModel.getAllExpenses().observe(this, { expenses ->
+            // Update UI with the new list of expenses
+        })
+
+        // Example: Inserting a new expense
+        val newExpense = Expense(description = "Sample Expense", amount = 100.0, category = "Food", date = System.currentTimeMillis())
+        viewModel.insertExpense(newExpense)
     }
 }

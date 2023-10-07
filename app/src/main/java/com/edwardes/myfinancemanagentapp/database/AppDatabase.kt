@@ -1,9 +1,10 @@
-package com.edwardes.myfinancemanagentapp
+package com.edwardes.myfinancemanagentapp.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+
 // creating an instance of the DAO interface and provides a reference to the database
 @Database(entities = [Expense::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

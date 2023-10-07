@@ -1,4 +1,4 @@
-package com.edwardes.myfinancemanagentapp
+package com.edwardes.myfinancemanagentapp.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
