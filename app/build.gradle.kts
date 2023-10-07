@@ -12,7 +12,7 @@ android {
         applicationId = "com.edwardes.myfinancemanagentapp"
         minSdk = 24
         //noinspection EditedTargetSdkVersion
-        targetSdk = 34  // <-- will this be ok
+        targetSdk = 33  // <-- will this be ok
         versionCode = 1
         versionName = "1.0"
 
@@ -58,6 +58,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.5.2")
 
     // Firebase Authentication
+    implementation ("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation ("com.google.firebase:firebase-auth:23.0.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
